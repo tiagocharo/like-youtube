@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import socketIOClient from "socket.io-client";
-import { setInterval } from 'timers';
 
 
 class App extends Component {
@@ -10,7 +8,7 @@ class App extends Component {
     super();
     this.state = {
       like: 0,
-      endpoint: "http://192.168.2.14:4001",
+      endpoint: "http://localhost:4001",
       disabled: false
     }
 
@@ -27,7 +25,8 @@ class App extends Component {
 
     setInterval(() => {
       this.setState({ disabled: false })
-    },10000)
+    },10000);
+
     const socket = socketIOClient(this.state.endpoint);
     socket.emit('new like')
   }
@@ -42,7 +41,9 @@ class App extends Component {
           src="https://www.youtube.com/embed/2MpUj-Aua48" 
           frameBorder="0" 
           allow="autoplay; encrypted-media" 
-          allowFullScreen></iframe>
+          allowFullScreen
+          title="Video from yotube"
+          className="iframe"></iframe>
           <div className="box-like">
             <button 
               ref={(button) => { this.button = button; }}
